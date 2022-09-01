@@ -1,0 +1,77 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<CRM.Modules.CRMProductDownload.Models.Item>
+
+@using System.Collections.Generic
+@using DotNetNuke.Web.Mvc.Helpers
+
+<div id="Item-@Dnn.ModuleContext.ModuleId">
+    <div class="dnnForm dnnEditBasicSettings" id="dnnEditBasicSettings">
+        <div class="dnnFormExpandContent dnnRight "><a href="#">@Dnn.LocalizeString("ExpandAll")</a></div>
+
+        <h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead dnnClear">
+            <a href="#" class="dnnSectionExpanded">@Dnn.LocalizeString("BasicSettings")</a>
+        </h2>
+        <fieldset>
+            <div class="dnnFormItem">
+                <div><label for="itemUrl">@Dnn.LocalizeString("lblUrl")</label></div>
+                @Html.TextBoxFor(m => m.ItemUrl)
+                @Html.ValidationMessageFor(m => m.ItemUrl, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemName">@Dnn.LocalizeString("lblName")</label></div>
+                @Html.TextBoxFor(m => m.ItemName)
+                @Html.ValidationMessageFor(m => m.ItemName, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemPath">@Dnn.LocalizeString("lblPath")</label></div>
+                @Html.TextBoxFor(m => m.ItemPath)
+                @Html.ValidationMessageFor(m => m.ItemPath, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemExtension">@Dnn.LocalizeString("lblExtension")</label></div>
+                @Html.TextBoxFor(m => m.ItemExtension)
+                @Html.ValidationMessageFor(m => m.ItemExtension, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemPlatform">@Dnn.LocalizeString("lblPlatform")</label></div>
+                @Html.TextBoxFor(m => m.ItemPlatform)
+                @Html.ValidationMessageFor(m => m.ItemPlatform, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemVersion">@Dnn.LocalizeString("lblVersion")</label></div>
+                @Html.TextBoxFor(m => m.ItemVersion)
+                @Html.ValidationMessageFor(m => m.ItemVersion, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemDescription">@Dnn.LocalizeString("lblDescription")</label></div>
+                @Html.TextArea("itemDescription", Model.ItemDescription)
+                @Html.ValidationMessageFor(m => m.ItemDescription, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemAvailable">@Dnn.LocalizeString("lblAvailable")</label></div>
+                @Html.TextBoxFor(m => m.ItemAvailable)
+            </div>
+            @Html.HiddenFor(m => m.ModuleId)
+        </fieldset>
+    </div>
+    <button type="submit" class="dnnPrimaryAction">@Dnn.LocalizeString("Submit")</button>
+    <a id="cancelEdit" href="#" class="dnnSecondaryAction">@Dnn.LocalizeString("Cancel")</a>
+</div>
+
+<script type="text/javascript">
+    /*globals jQuery, window, Sys */
+    (function($, Sys) {
+        function dnnEditBasicSettings() {
+            $('#dnnEditBasicSettings').dnnPanels();
+            $('#dnnEditBasicSettings .dnnFormExpandContent a').dnnExpandAll({ expandText: '@Dnn.LocalizeString("ExpandAll")', collapseText: '@Dnn.LocalizeString("CollapseAll")', targetArea: '#dnnEditBasicSettings' });
+        }
+
+        $(function() {
+            $('#cancelEdit').click(function() { dnnModal.closePopUp(false); });
+            dnnEditBasicSettings();
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function() {
+                dnnEditBasicSettings();
+            });
+        });
+
+    }(jQuery, window.Sys));
+</script>

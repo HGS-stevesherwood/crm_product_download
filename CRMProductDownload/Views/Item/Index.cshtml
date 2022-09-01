@@ -1,0 +1,52 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<CRM.Modules.CRMProductDownload.Models.Item>>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+<div id="Items-@Dnn.ModuleContext.ModuleId">
+    @if (Model.Count() == 0)
+    {
+        <p>@Dnn.LocalizeString("NoItems")</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Path</th>
+                <th>Extension</th>
+                <th>Platform</th>
+                <th>Description</th>
+                <th>Version</th>
+                <th>Expires</th>
+                <th>Download</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.ItemPath</td>
+                <td>@item.ItemExtension</td>
+                <td>@item.ItemPlatform</td>
+                <td>@item.ItemDescription</td>
+                <td>@item.ItemVersion</td>
+                <td>@item.ItemAvailable</td>
+                <td>
+                    <a href="@Url.Action("Activate", "Item", new {itemId = item.ItemId})">@Dnn.LocalizeString("DownloadItem")</a>
+                </td>
+                <td>
+                    @{
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <div>
+                                <a href="@Url.Action("Edit", "Item", new {ctl = "Edit", itemId = item.ItemId})">@Dnn.LocalizeString("EditItem")</a>
+                                <a href="@Url.Action("Delete", "Item", new {itemId = item.ItemId})">@Dnn.LocalizeString("DeleteItem")</a>
+                            </div>
+                        }
+                    }
+                </td>
+            </tr>
+            }
+        </table>
+    }
+</div>
