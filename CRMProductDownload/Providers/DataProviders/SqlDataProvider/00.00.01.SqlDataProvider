@@ -23,6 +23,7 @@ CREATE TABLE {databaseOwner}{objectQualifier}CRMProductDownload_Items
 	ItemUrl nvarchar(MAX) NOT NULL,
 	ItemSignedUrl nvarchar(MAX) NOT NULL,
 	ItemVersion nvarchar(MAX) NOT NULL,
+	ItemCategory nvarchar(MAX) NOT NULL,
 	ItemPrivateKeyId nvarchar(MAX) NOT NULL,
 	ItemAvailable datetime NOT NULL,
 	ItemDuration datetime NOT NULL,

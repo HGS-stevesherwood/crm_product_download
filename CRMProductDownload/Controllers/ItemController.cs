@@ -100,6 +100,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 item.CreatedOnDate = DateTime.UtcNow;
                 item.LastModifiedByUserId = User.UserID;
                 item.LastModifiedOnDate = DateTime.UtcNow;
+                item.ItemCategory = item.ItemCategory;
                 item.ItemName = item.ItemName;
                 item.ItemPath = item.ItemPath;
                 item.ItemExtension = item.ItemExtension;
@@ -118,6 +119,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
 
                 existingItem.LastModifiedByUserId = User.UserID;
                 existingItem.LastModifiedOnDate = DateTime.UtcNow;
+                existingItem.ItemCategory = item.ItemCategory;
                 existingItem.ItemName = item.ItemName;
                 existingItem.ItemPath = item.ItemPath;
                 existingItem.ItemExtension = item.ItemExtension;
@@ -138,10 +140,60 @@ namespace CRM.Modules.CRMProductDownload.Controllers
         }
 
         [ModuleAction(ControlKey = "Edit", TitleKey = "AddItem")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
+
+
+            ViewBag.CategorySortParam = sortOrder == "category" ? "category_desc" : "category";
+            ViewBag.NameSortParam = sortOrder == "name" ? "name_desc" : "name";
+            ViewBag.VersionSortParam = sortOrder == "version" ? "version_desc" : "version";
+            ViewBag.PlatformSortParam = sortOrder == "platform" ? "platform_desc" : "platform";
+            
+            ViewBag.CurrentFilter = searchString;
+
             var items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
+
+
+            if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
+            {
+                items = items.Where(i => i.ItemName.Contains(ViewBag.CurrentFilter)
+                                       || i.ItemVersion.Contains(ViewBag.CurrentFilter)
+                                       || i.ItemCategory.Contains(ViewBag.CurrentFilter)
+                                       || i.ItemPlatform.Contains(ViewBag.CurrentFilter));
+            }
+
+            switch (sortOrder)
+            {
+                case "category":
+                    items = items.OrderBy(i => i.ItemCategory);
+                    break;
+                case "category_desc":
+                    items = items.OrderByDescending(i => i.ItemCategory);
+                    break;
+                case "name":
+                    items = items.OrderBy(i => i.ItemName);
+                    break;
+                case "name_desc":
+                    items = items.OrderByDescending(i => i.ItemName);
+                    break;
+                case "version":
+                    items = items.OrderBy(i => i.ItemVersion);
+                    break;
+                case "version_desc":
+                    items = items.OrderByDescending(i => i.ItemVersion);
+                    break;
+                case "platform":
+                    items = items.OrderBy(i => i.ItemPlatform);
+                    break;
+                case "platform_desc":
+                    items = items.OrderByDescending(i => i.ItemPlatform);
+                    break;
+                default:
+                    break;
+            }
+
             return View(items);
         }
+
     }
 }

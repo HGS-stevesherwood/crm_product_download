@@ -76,6 +76,12 @@ namespace CRM.Modules.CRMProductDownload.Models
         public string ItemDescription { get; set; }
 
         ///<summary>
+        /// A string with the group of the object
+        ///</summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide a valid product category")]
+        public string ItemCategory { get; set; }
+
+        ///<summary>
         /// The date the object is available
         ///</summary>
         public DateTime ItemAvailable { get; set; } = DateTime.UtcNow;

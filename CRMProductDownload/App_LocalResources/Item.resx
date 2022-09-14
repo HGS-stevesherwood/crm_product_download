@@ -180,4 +180,22 @@
   <data name="ActivateItem.Text" xml:space="preserve">
     <value>Activated:false</value>
   </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CategorySort.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="NameSort.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PlatformSort.Text" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="SeachItem.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="VersionSort.Text" xml:space="preserve">
+    <value>Version</value>
+  </data>
 </root>

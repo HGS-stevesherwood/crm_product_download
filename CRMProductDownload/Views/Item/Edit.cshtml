@@ -50,6 +50,10 @@
                 <div><label for="itemAvailable">@Dnn.LocalizeString("lblAvailable")</label></div>
                 @Html.TextBoxFor(m => m.ItemAvailable)
             </div>
+            <div class="dnnFormItem">
+                <div><label for="itemCategory">@Dnn.LocalizeString("lblCategory")</label></div>
+                @Html.TextBoxFor(m => m.ItemCategory)
+            </div>
             @Html.HiddenFor(m => m.ModuleId)
         </fieldset>
     </div>
