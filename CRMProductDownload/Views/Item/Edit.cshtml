@@ -51,6 +51,14 @@
                 @Html.TextBoxFor(m => m.ItemAvailable)
             </div>
             <div class="dnnFormItem">
+                <div><label for="itemPublished">@Dnn.LocalizeString("lblPublished")</label></div>
+                @Html.TextBoxFor(m => m.ItemPublished)
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemLatest">@Dnn.LocalizeString("lblLatest")</label></div>
+                @Html.TextBoxFor(m => m.ItemLatest)
+            </div>
+            <div class="dnnFormItem">
                 <div><label for="itemCategory">@Dnn.LocalizeString("lblCategory")</label></div>
                 @Html.TextBoxFor(m => m.ItemCategory)
             </div>

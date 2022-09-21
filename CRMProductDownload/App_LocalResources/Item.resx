@@ -157,7 +157,7 @@
     <value>Download</value>
   </data>
   <data name="lblAvailable.Text" xml:space="preserve">
-    <value>Date Available</value>
+    <value>Date Added</value>
   </data>
   <data name="lblVersion.Text" xml:space="preserve">
     <value>Product Version</value>
@@ -197,5 +197,11 @@
   </data>
   <data name="VersionSort.Text" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="lblPublished.Text" xml:space="preserve">
+    <value>Published(true or false)</value>
+  </data>
+  <data name="lblLatest.Text" xml:space="preserve">
+    <value>Latest(true or false)</value>
   </data>
 </root>

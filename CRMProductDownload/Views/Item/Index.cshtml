@@ -16,24 +16,28 @@
                 <p>
                     Filter: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
                     <input type="submit" value="Search" class="btn btn-default" /> |
-                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.CategorySortParam })">All</a>
-                </p>
+                    <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })">Latest</a> |
+                    <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })">Previous</a> |
+                    @{
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })">All</a>
+                        }
+                     }
+                    </p>
             </div>
         </form>
         <table class="table table-bordered table-responsive table-hover">
 
             <tr>
                 <th>
-                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.CategorySortParam })">@Dnn.LocalizeString("CategorySort")</a>
+                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.NameSortParam, viewOrder = ViewBag.ViewFilter })">@Dnn.LocalizeString("NameSort")</a>
                 </th>
                 <th>
-                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.NameSortParam })">@Dnn.LocalizeString("NameSort")</a>
+                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.VersionSortParam, viewOrder = ViewBag.ViewFilter })">@Dnn.LocalizeString("VersionSort")</a>
                 </th>
                 <th>
-                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.VersionSortParam })">@Dnn.LocalizeString("VersionSort")</a>
-                </th>
-                <th>
-                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.PlatformSortParam })">@Dnn.LocalizeString("PlatformSort")</a>
+                    <a href="@Url.Action("Index", "Item", new { sortOrder = ViewBag.PlatformSortParam, viewOrder = ViewBag.ViewFilter })">@Dnn.LocalizeString("PlatformSort")</a>
                 </th>
                 <th>Description</th>
                 <th>Download</th>
@@ -41,29 +45,29 @@
 
             @foreach (var item in Model)
             {
-
-                <tr>
-                    <td>@item.ItemCategory</td>
-                    <td>@item.ItemName</td>
-                    <td>@item.ItemVersion</td>
-                    <td>@item.ItemPlatform</td>
-                    <td>@item.ItemDescription</td>
-                    <td>
-                        <a href="@Url.Action("Activate", "Item", new {itemId = item.ItemId})">@Dnn.LocalizeString("DownloadItem")</a>
-                    </td>
-                    <td>
-                        @{
-                            if (Dnn.ModuleContext.IsEditable)
-                            {
-                                <div>
-                                    <a href="@Url.Action("Edit", "Item", new {ctl = "Edit", itemId = item.ItemId})">@Dnn.LocalizeString("EditItem")</a>
-                                    <a href="@Url.Action("Delete", "Item", new {itemId = item.ItemId})">@Dnn.LocalizeString("DeleteItem")</a>
-                                </div>
+              
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>@item.ItemVersion</td>
+                        <td>@item.ItemPlatform</td>
+                        <td>@item.ItemDescription</td>
+                        <td>
+                            <a href="@Url.Action("Activate", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DownloadItem")</a>
+                        </td>
+                        <td>
+                            @{
+                                if (Dnn.ModuleContext.IsEditable)
+                                {
+                                    <div>
+                                        <a href="@Url.Action("Edit", "Item", new { ctl = "Edit", itemId = item.ItemId })">@Dnn.LocalizeString("EditItem")</a>
+                                        <a href="@Url.Action("Delete", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DeleteItem")</a>
+                                    </div>
+                                }
                             }
-                        }
-                    </td>
-                </tr>
-            }
+                        </td>
+                    </tr>
+             }
+
         </table>
     }
 </div>

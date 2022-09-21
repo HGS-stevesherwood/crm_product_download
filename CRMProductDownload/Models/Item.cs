@@ -122,6 +122,18 @@ namespace CRM.Modules.CRMProductDownload.Models
         public DateTime ItemDuration { get; set; } = DateTime.Now.AddDays(Double.Parse("25"));
 
         ///<summary>
+        /// The state of the publised product
+        ///</summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide 'true' or 'false' value")]
+        public string ItemPublished { get; set; }
+
+        ///<summary>
+        /// The state of latest product
+        ///</summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide 'true' or 'false' value")]
+        public string ItemLatest { get; set; }
+
+        ///<summary
         /// A string with the item private key id
         ///</summary>
         public string ItemPrivateKeyId { get; set; } = "K33HASPSL3ZKRV";

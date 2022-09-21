@@ -101,6 +101,8 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 item.LastModifiedByUserId = User.UserID;
                 item.LastModifiedOnDate = DateTime.UtcNow;
                 item.ItemCategory = item.ItemCategory;
+                item.ItemPublished = item.ItemPublished;
+                item.ItemLatest = item.ItemLatest;
                 item.ItemName = item.ItemName;
                 item.ItemPath = item.ItemPath;
                 item.ItemExtension = item.ItemExtension;
@@ -120,6 +122,8 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 existingItem.LastModifiedByUserId = User.UserID;
                 existingItem.LastModifiedOnDate = DateTime.UtcNow;
                 existingItem.ItemCategory = item.ItemCategory;
+                existingItem.ItemPublished = item.ItemPublished;
+                existingItem.ItemLatest = item.ItemLatest;
                 existingItem.ItemName = item.ItemName;
                 existingItem.ItemPath = item.ItemPath;
                 existingItem.ItemExtension = item.ItemExtension;
@@ -140,22 +144,53 @@ namespace CRM.Modules.CRMProductDownload.Controllers
         }
 
         [ModuleAction(ControlKey = "Edit", TitleKey = "AddItem")]
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string viewOrder)
         {
-
 
             ViewBag.CategorySortParam = sortOrder == "category" ? "category_desc" : "category";
             ViewBag.NameSortParam = sortOrder == "name" ? "name_desc" : "name";
             ViewBag.VersionSortParam = sortOrder == "version" ? "version_desc" : "version";
             ViewBag.PlatformSortParam = sortOrder == "platform" ? "platform_desc" : "platform";
-            
+            ViewBag.LatestSortParam = viewOrder == "latest" ? "latest" : "latest";
+            ViewBag.PreviousSortParam = viewOrder == "previous" ? "previous" : "previous";
+            ViewBag.AllSortParam = viewOrder == "all" ? "all" : "all";
+
             ViewBag.CurrentFilter = searchString;
+
+            ViewBag.ViewFilter = viewOrder;
 
             var items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
 
+            if (!String.IsNullOrEmpty(ViewBag.ViewFilter))
+            {
+                switch (viewOrder)
+                {
+                    case "latest":
+                        Func<Item, bool> isLatest = i => i.ItemLatest == "true";
+                        var latestItems = items.Where(isLatest);
+                        Func<Item, bool> isPublishedLatest = i => i.ItemPublished == "true";
+                        var publishedLatestItems = latestItems.Where(isPublishedLatest);
+                        items = publishedLatestItems;
+                        break;
+                    case "previous":
+                        Func<Item, bool> isPrevious = i => i.ItemLatest == "false";
+                        var previousItems = items.Where(isPrevious);
+                        Func<Item, bool> isPublishedPrevious = i => i.ItemPublished == "true";
+                        var publishedPreviousItems = previousItems.Where(isPublishedPrevious);
+                        items = publishedPreviousItems;
+                        break;
+                    case "all":
+                        items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
+                        break;
+                    default:
+                        break;
+                }
+
+            } 
 
             if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
             {
+
                 items = items.Where(i => i.ItemName.Contains(ViewBag.CurrentFilter)
                                        || i.ItemVersion.Contains(ViewBag.CurrentFilter)
                                        || i.ItemCategory.Contains(ViewBag.CurrentFilter)
