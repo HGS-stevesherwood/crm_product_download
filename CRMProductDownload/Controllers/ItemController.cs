@@ -153,7 +153,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             ViewBag.PlatformSortParam = sortOrder == "platform" ? "platform_desc" : "platform";
             ViewBag.LatestSortParam = viewOrder == "latest" ? "latest" : "latest";
             ViewBag.PreviousSortParam = viewOrder == "previous" ? "previous" : "previous";
-            ViewBag.AllSortParam = viewOrder == "all" ? "all" : "all";
+            ViewBag.AllSortParam = viewOrder == "staged" ? "staged" : "staged";
 
             ViewBag.CurrentFilter = searchString;
 
@@ -179,8 +179,12 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                         var publishedPreviousItems = previousItems.Where(isPublishedPrevious);
                         items = publishedPreviousItems;
                         break;
-                    case "all":
-                        items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
+                    case "staged":
+                        Func<Item, bool> isPreviousStaged = i => i.ItemLatest == "false";
+                        var previousStagedItems = items.Where(isPreviousStaged);
+                        Func<Item, bool> isPublishedStaged = i => i.ItemPublished == "false";
+                        var stagedItems = previousStagedItems.Where(isPublishedStaged);
+                        items = stagedItems;
                         break;
                     default:
                         break;
