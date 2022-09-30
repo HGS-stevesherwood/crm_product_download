@@ -121,7 +121,7 @@
     <value>Add New Item</value>
   </data>
   <data name="BasicSettings.Text" xml:space="preserve">
-    <value>CRMProductDownload Item Basic Settings</value>
+    <value>CRMProductDownload Product Settings</value>
   </data>
   <data name="Cancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -198,10 +198,31 @@
   <data name="VersionSort.Text" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="lblPublished.Text" xml:space="preserve">
-    <value>Published(true or false)</value>
+  <data name="lblPublish.Text" xml:space="preserve">
+    <value>Publish</value>
   </data>
   <data name="lblLatest.Text" xml:space="preserve">
-    <value>Latest(true or false)</value>
+    <value>Latest</value>
+  </data>
+  <data name="lblStage.Text" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="lblPrevious.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="lblDemote.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="lblPromote.Text" xml:space="preserve">
+    <value>Latest</value>
+  </data>
+  <data name="lblPublished.Text" xml:space="preserve">
+    <value>Product State:</value>
+  </data>
+  <data name="lblUnPublish.Text" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="lblVersioned.Text" xml:space="preserve">
+    <value>Product Version:</value>
   </data>
 </root>

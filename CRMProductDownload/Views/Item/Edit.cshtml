@@ -17,6 +17,10 @@
                 @Html.ValidationMessageFor(m => m.ItemUrl, "", new { @Style = "color:red" })
             </div>
             <div class="dnnFormItem">
+                <div><label for="itemCategory">@Dnn.LocalizeString("lblCategory")</label></div>
+                @Html.TextBoxFor(m => m.ItemCategory)
+            </div>
+            <div class="dnnFormItem">
                 <div><label for="itemName">@Dnn.LocalizeString("lblName")</label></div>
                 @Html.TextBoxFor(m => m.ItemName)
                 @Html.ValidationMessageFor(m => m.ItemName, "", new { @Style = "color:red" })
@@ -50,17 +54,17 @@
                 <div><label for="itemAvailable">@Dnn.LocalizeString("lblAvailable")</label></div>
                 @Html.TextBoxFor(m => m.ItemAvailable)
             </div>
+            <hr/>
             <div class="dnnFormItem">
-                <div><label for="itemPublished">@Dnn.LocalizeString("lblPublished")</label></div>
-                @Html.TextBoxFor(m => m.ItemPublished)
+                <div><label for="itemViewableState">@Dnn.LocalizeString("lblPublished")</label></div>
+                <div><label for="itemPublish">@Dnn.LocalizeString("lblPublish")</label>@Html.RadioButtonFor(m => m.ItemPublished, "true")</div>
+                <div><label for="itemConceal">@Dnn.LocalizeString("lblStage")</label>@Html.RadioButtonFor(m => m.ItemPublished, "false")</div>
             </div>
+            <hr/>
             <div class="dnnFormItem">
-                <div><label for="itemLatest">@Dnn.LocalizeString("lblLatest")</label></div>
-                @Html.TextBoxFor(m => m.ItemLatest)
-            </div>
-            <div class="dnnFormItem">
-                <div><label for="itemCategory">@Dnn.LocalizeString("lblCategory")</label></div>
-                @Html.TextBoxFor(m => m.ItemCategory)
+                <div><label for="itemViewableState">@Dnn.LocalizeString("lblVersioned")</label></div>
+                <div><label for="itemLatest">@Dnn.LocalizeString("lblLatest")</label>@Html.RadioButtonFor(m => m.ItemLatest, "true")</div>
+                <div><label for="itemPrevious">@Dnn.LocalizeString("lblPrevious")</label>@Html.RadioButtonFor(m => m.ItemLatest, "false")</div>
             </div>
             @Html.HiddenFor(m => m.ModuleId)
         </fieldset>

@@ -125,13 +125,13 @@ namespace CRM.Modules.CRMProductDownload.Models
         /// The state of the publised product
         ///</summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide 'true' or 'false' value")]
-        public string ItemPublished { get; set; }
+        public string ItemPublished { get; set; } = "true";
 
         ///<summary>
         /// The state of latest product
         ///</summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide 'true' or 'false' value")]
-        public string ItemLatest { get; set; }
+        public string ItemLatest { get; set; } = "true";
 
         ///<summary
         /// A string with the item private key id
@@ -144,4 +144,5 @@ namespace CRM.Modules.CRMProductDownload.Models
         public string ItemSignedUrl { get; set; } = "";
 
     }
+
 }

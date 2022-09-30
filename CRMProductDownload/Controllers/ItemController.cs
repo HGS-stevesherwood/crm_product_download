@@ -44,6 +44,38 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             return RedirectToDefaultRoute();
         }
 
+        public ActionResult Publish(int itemId)
+        {
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+            item.ItemPublished = "true";
+            ItemManager.Instance.UpdateItem(item);
+            return RedirectToDefaultRoute();
+        }
+
+        public ActionResult UnPublish(int itemId)
+        {
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+            item.ItemPublished = "false";
+            ItemManager.Instance.UpdateItem(item);
+            return RedirectToDefaultRoute();
+        }
+
+        public ActionResult Promote(int itemId)
+        {
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+            item.ItemLatest = "true";
+            ItemManager.Instance.UpdateItem(item);
+            return RedirectToDefaultRoute();
+        }
+
+        public ActionResult Demote(int itemId)
+        {
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+            item.ItemLatest = "false";
+            ItemManager.Instance.UpdateItem(item);
+            return RedirectToDefaultRoute();
+        }
+
         public ActionResult Activate(int itemId)
         {
 
@@ -61,7 +93,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
         public void GetSignedURL(Item item)
         {
             //Create object of FileInfo for specified path           
-            FileInfo pkfile = new FileInfo(Server.MapPath("~/App_Data/private.pem"));
+            FileInfo pkfile = new FileInfo(Server.MapPath("~/private.pem"));
             
             item.ItemSignedUrl = AmazonCloudFrontUrlSigner.GetCannedSignedURL(
             AmazonCloudFrontUrlSigner.Protocol.https,
@@ -180,10 +212,8 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                         items = publishedPreviousItems;
                         break;
                     case "staged":
-                        Func<Item, bool> isPreviousStaged = i => i.ItemLatest == "false";
-                        var previousStagedItems = items.Where(isPreviousStaged);
-                        Func<Item, bool> isPublishedStaged = i => i.ItemPublished == "false";
-                        var stagedItems = previousStagedItems.Where(isPublishedStaged);
+                        Func<Item, bool> isStaged = i => i.ItemPublished == "false";
+                        var stagedItems = items.Where(isStaged);
                         items = stagedItems;
                         break;
                     default:

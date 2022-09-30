@@ -58,10 +58,31 @@
                             @{
                                 if (Dnn.ModuleContext.IsEditable)
                                 {
-                                    <div>
-                                        <a href="@Url.Action("Edit", "Item", new { ctl = "Edit", itemId = item.ItemId })">@Dnn.LocalizeString("EditItem")</a>
-                                        <a href="@Url.Action("Delete", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DeleteItem")</a>
-                                    </div>
+                            <div>
+                                <a href="@Url.Action("Edit", "Item", new { ctl = "Edit", itemId = item.ItemId })">@Dnn.LocalizeString("EditItem")</a>
+                                <a href="@Url.Action("Delete", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DeleteItem")</a>
+                                @{
+
+                                    if (item.ItemLatest == "true" && item.ItemPublished == "true")
+                                    {
+                                        <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
+                                        <a href="@Url.Action("Demote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblDemote")</a>
+                                    }
+
+
+                                    if (item.ItemLatest == "false" && item.ItemPublished == "true")
+                                    {
+                                        <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
+                                        <a href="@Url.Action("Promote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPromote")</a>
+                                    }
+
+                                    if (item.ItemPublished == "false")
+                                    {
+                                        <a href="@Url.Action("Publish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPublish")</a>
+                                    }
+
+                                }
+                            </div>
                                 }
                             }
                         </td>
