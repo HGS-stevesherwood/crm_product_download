@@ -17,6 +17,8 @@ CREATE TABLE {databaseOwner}{objectQualifier}CRMProductDownload_Items
     ItemId int NOT NULL IDENTITY (1, 1),
     ItemName nvarchar(MAX) NOT NULL,
 	ItemPath nvarchar(MAX) NOT NULL,
+	ItemReleasePath nvarchar(MAX) NOT NULL,
+	ItemInstallationPath nvarchar(MAX) NOT NULL,
 	ItemExtension varchar(MAX) NOT NULL,
 	ItemPlatform varchar(MAX) NOT NULL,
     ItemDescription nvarchar(MAX) NOT NULL,

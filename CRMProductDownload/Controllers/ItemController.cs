@@ -90,6 +90,35 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             return Redirect(item.ItemSignedUrl);
         }
 
+        public ActionResult Release(int itemId)
+        {
+
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+
+            GetSignedReleaseURL(item);
+
+            item.ItemAvailable = item.ItemDuration;
+
+            ItemManager.Instance.UpdateItem(item);
+
+            return Redirect(item.ItemSignedUrl);
+        }
+
+
+        public ActionResult Installation(int itemId)
+        {
+
+            var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
+
+            GetSignedInstallationURL(item);
+
+            item.ItemAvailable = item.ItemDuration;
+
+            ItemManager.Instance.UpdateItem(item);
+
+            return Redirect(item.ItemSignedUrl);
+        }
+
         public void GetSignedURL(Item item)
         {
             //Create object of FileInfo for specified path           
@@ -100,6 +129,35 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             item.ItemUrl,
             pkfile,
             item.ItemPath,
+            item.ItemPrivateKeyId,
+            item.ItemDuration);
+        }
+
+        public void GetSignedReleaseURL(Item item)
+        {
+            //Create object of FileInfo for specified path           
+            FileInfo pkfile = new FileInfo(Server.MapPath("~/private.pem"));
+
+            item.ItemSignedUrl = AmazonCloudFrontUrlSigner.GetCannedSignedURL(
+            AmazonCloudFrontUrlSigner.Protocol.https,
+            item.ItemUrl,
+            pkfile,
+            item.ItemReleasePath,
+            item.ItemPrivateKeyId,
+            item.ItemDuration);
+        }
+
+
+        public void GetSignedInstallationURL(Item item)
+        {
+            //Create object of FileInfo for specified path           
+            FileInfo pkfile = new FileInfo(Server.MapPath("~/private.pem"));
+
+            item.ItemSignedUrl = AmazonCloudFrontUrlSigner.GetCannedSignedURL(
+            AmazonCloudFrontUrlSigner.Protocol.https,
+            item.ItemUrl,
+            pkfile,
+            item.ItemInstallationPath,
             item.ItemPrivateKeyId,
             item.ItemDuration);
         }
@@ -217,10 +275,22 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                         items = stagedItems;
                         break;
                     default:
+                        Func<Item, bool> isDefault = i => i.ItemLatest == "true";
+                        var defaultItems = items.Where(isDefault);
+                        Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
+                        var defaultLatestItems = defaultItems.Where(isPublishedDefault);
+                        items = defaultLatestItems;
                         break;
                 }
 
-            } 
+            } else
+            {
+                Func<Item, bool> isDefault = i => i.ItemLatest == "true";
+                var defaultItems = items.Where(isDefault);
+                Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
+                var defaultLatestItems = defaultItems.Where(isPublishedDefault);
+                items = defaultLatestItems;
+            }
 
             if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
             {
@@ -258,6 +328,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                     items = items.OrderByDescending(i => i.ItemPlatform);
                     break;
                 default:
+                    items = items.OrderBy(i => i.ItemCategory);
                     break;
             }
 

@@ -31,6 +31,16 @@
                 @Html.ValidationMessageFor(m => m.ItemPath, "", new { @Style = "color:red" })
             </div>
             <div class="dnnFormItem">
+                <div><label for="itemReleasePath">@Dnn.LocalizeString("lblReleasePath")</label></div>
+                @Html.TextBoxFor(m => m.ItemReleasePath)
+                @Html.ValidationMessageFor(m => m.ItemReleasePath, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="itemInstallationPath">@Dnn.LocalizeString("lblInstallationPath")</label></div>
+                @Html.TextBoxFor(m => m.ItemInstallationPath)
+                @Html.ValidationMessageFor(m => m.ItemInstallationPath, "", new { @Style = "color:red" })
+            </div>
+            <div class="dnnFormItem">
                 <div><label for="itemExtension">@Dnn.LocalizeString("lblExtension")</label></div>
                 @Html.TextBoxFor(m => m.ItemExtension)
                 @Html.ValidationMessageFor(m => m.ItemExtension, "", new { @Style = "color:red" })
@@ -54,13 +64,13 @@
                 <div><label for="itemAvailable">@Dnn.LocalizeString("lblAvailable")</label></div>
                 @Html.TextBoxFor(m => m.ItemAvailable)
             </div>
-            <hr/>
+            <hr />
             <div class="dnnFormItem">
                 <div><label for="itemViewableState">@Dnn.LocalizeString("lblPublished")</label></div>
                 <div><label for="itemPublish">@Dnn.LocalizeString("lblPublish")</label>@Html.RadioButtonFor(m => m.ItemPublished, "true")</div>
                 <div><label for="itemConceal">@Dnn.LocalizeString("lblStage")</label>@Html.RadioButtonFor(m => m.ItemPublished, "false")</div>
             </div>
-            <hr/>
+            <hr />
             <div class="dnnFormItem">
                 <div><label for="itemViewableState">@Dnn.LocalizeString("lblVersioned")</label></div>
                 <div><label for="itemLatest">@Dnn.LocalizeString("lblLatest")</label>@Html.RadioButtonFor(m => m.ItemLatest, "true")</div>

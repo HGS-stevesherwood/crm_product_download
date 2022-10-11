@@ -202,19 +202,19 @@
     <value>Publish</value>
   </data>
   <data name="lblLatest.Text" xml:space="preserve">
-    <value>Latest</value>
+    <value>Current</value>
   </data>
   <data name="lblStage.Text" xml:space="preserve">
     <value>Stage</value>
   </data>
   <data name="lblPrevious.Text" xml:space="preserve">
-    <value>Previous</value>
+    <value>Prior</value>
   </data>
   <data name="lblDemote.Text" xml:space="preserve">
-    <value>Previous</value>
+    <value>Prior</value>
   </data>
   <data name="lblPromote.Text" xml:space="preserve">
-    <value>Latest</value>
+    <value>Current</value>
   </data>
   <data name="lblPublished.Text" xml:space="preserve">
     <value>Product State:</value>
@@ -224,5 +224,32 @@
   </data>
   <data name="lblVersioned.Text" xml:space="preserve">
     <value>Product Version:</value>
+  </data>
+  <data name="CurrentView.Text" xml:space="preserve">
+    <value>Current Releases:</value>
+  </data>
+  <data name="FilterView.Text" xml:space="preserve">
+    <value>Filter:</value>
+  </data>
+  <data name="InstallationGuide.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="lblInstallationPath.Text" xml:space="preserve">
+    <value>Installation Notes</value>
+  </data>
+  <data name="lblReleasePath.Text" xml:space="preserve">
+    <value>Release Notes</value>
+  </data>
+  <data name="PriorView.Text" xml:space="preserve">
+    <value>Prior Releases:</value>
+  </data>
+  <data name="ReleaseNotes.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="ReleaseView.Text" xml:space="preserve">
+    <value>View:</value>
+  </data>
+  <data name="StagedView.Text" xml:space="preserve">
+    <value>Staged Releases:</value>
   </data>
 </root>

@@ -52,6 +52,18 @@ namespace CRM.Modules.CRMProductDownload.Models
         public string ItemPath { get; set; }
 
         ///<summary>
+        /// A string with the release notes path of the object
+        ///</summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide a valid path path/item i.e envi563_release.pdf")]
+        public string ItemReleasePath { get; set; }
+
+        ///<summary>
+        /// A string with the installation notes path of the object
+        ///</summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide a valid path path/item i.e envi563_installation.html")]
+        public string ItemInstallationPath { get; set; }
+
+        ///<summary>
         /// A string with the extension of the object
         ///</summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide a valid extension i.e gz, zip")]
