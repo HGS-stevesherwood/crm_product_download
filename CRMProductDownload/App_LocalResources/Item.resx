@@ -226,7 +226,7 @@
     <value>Product Version:</value>
   </data>
   <data name="CurrentView.Text" xml:space="preserve">
-    <value>Current Releases:</value>
+    <value>Current Releases</value>
   </data>
   <data name="FilterView.Text" xml:space="preserve">
     <value>Filter:</value>
@@ -241,7 +241,7 @@
     <value>Release Notes</value>
   </data>
   <data name="PriorView.Text" xml:space="preserve">
-    <value>Prior Releases:</value>
+    <value>Prior Releases</value>
   </data>
   <data name="ReleaseNotes.Text" xml:space="preserve">
     <value>Download</value>
@@ -250,6 +250,6 @@
     <value>View:</value>
   </data>
   <data name="StagedView.Text" xml:space="preserve">
-    <value>Staged Releases:</value>
+    <value>Staged Releases</value>
   </data>
 </root>

@@ -236,103 +236,123 @@ namespace CRM.Modules.CRMProductDownload.Controllers
         [ModuleAction(ControlKey = "Edit", TitleKey = "AddItem")]
         public ActionResult Index(string sortOrder, string searchString, string viewOrder)
         {
-
-            ViewBag.CategorySortParam = sortOrder == "category" ? "category_desc" : "category";
-            ViewBag.NameSortParam = sortOrder == "name" ? "name_desc" : "name";
-            ViewBag.VersionSortParam = sortOrder == "version" ? "version_desc" : "version";
-            ViewBag.PlatformSortParam = sortOrder == "platform" ? "platform_desc" : "platform";
-            ViewBag.LatestSortParam = viewOrder == "latest" ? "latest" : "latest";
-            ViewBag.PreviousSortParam = viewOrder == "previous" ? "previous" : "previous";
-            ViewBag.AllSortParam = viewOrder == "staged" ? "staged" : "staged";
-
-            ViewBag.CurrentFilter = searchString;
-
-            ViewBag.ViewFilter = viewOrder;
-
-            var items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
-
-            if (!String.IsNullOrEmpty(ViewBag.ViewFilter))
+            if (Request.IsAuthenticated)
             {
-                switch (viewOrder)
+
+                //Setup View
+                ViewBag.CategorySortParam = sortOrder == "category" ? "category_desc" : "category";
+                ViewBag.NameSortParam = sortOrder == "name" ? "name_desc" : "name";
+                ViewBag.VersionSortParam = sortOrder == "version" ? "version_desc" : "version";
+                ViewBag.PlatformSortParam = sortOrder == "platform" ? "platform_desc" : "platform";
+                ViewBag.LatestSortParam = viewOrder == "latest" ? "latest" : "latest";
+                ViewBag.PreviousSortParam = viewOrder == "previous" ? "previous" : "previous";
+                ViewBag.AllSortParam = viewOrder == "staged" ? "staged" : "staged";
+
+
+                //Setup Filter
+                ViewBag.CurrentFilter = searchString;
+
+
+                //Setup ViewOrder
+                ViewBag.ViewFilter = viewOrder;
+
+
+                //Setup ViewItems
+                var items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
+
+
+                //Handle Request Events
+                if (!String.IsNullOrEmpty(ViewBag.ViewFilter))
                 {
-                    case "latest":
-                        Func<Item, bool> isLatest = i => i.ItemLatest == "true";
-                        var latestItems = items.Where(isLatest);
-                        Func<Item, bool> isPublishedLatest = i => i.ItemPublished == "true";
-                        var publishedLatestItems = latestItems.Where(isPublishedLatest);
-                        items = publishedLatestItems;
+                    switch (viewOrder)
+                    {
+                        case "latest":
+                            Func<Item, bool> isLatest = i => i.ItemLatest == "true";
+                            var latestItems = items.Where(isLatest);
+                            Func<Item, bool> isPublishedLatest = i => i.ItemPublished == "true";
+                            var publishedLatestItems = latestItems.Where(isPublishedLatest);
+                            items = publishedLatestItems;
+                            break;
+                        case "previous":
+                            Func<Item, bool> isPrevious = i => i.ItemLatest == "false";
+                            var previousItems = items.Where(isPrevious);
+                            Func<Item, bool> isPublishedPrevious = i => i.ItemPublished == "true";
+                            var publishedPreviousItems = previousItems.Where(isPublishedPrevious);
+                            items = publishedPreviousItems;
+                            break;
+                        case "staged":
+                            Func<Item, bool> isStaged = i => i.ItemPublished == "false";
+                            var stagedItems = items.Where(isStaged);
+                            items = stagedItems;
+                            break;
+                        default:
+                            Func<Item, bool> isDefault = i => i.ItemLatest == "true";
+                            var defaultItems = items.Where(isDefault);
+                            Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
+                            var defaultLatestItems = defaultItems.Where(isPublishedDefault);
+                            items = defaultLatestItems;
+                            break;
+                    }
+
+                }
+                else
+                {
+                    Func<Item, bool> isDefault = i => i.ItemLatest == "true";
+                    var defaultItems = items.Where(isDefault);
+                    Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
+                    var defaultLatestItems = defaultItems.Where(isPublishedDefault);
+                    items = defaultLatestItems;
+                }
+
+                if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
+                {
+
+                    items = items.Where(i => i.ItemName.Contains(ViewBag.CurrentFilter)
+                                           || i.ItemVersion.Contains(ViewBag.CurrentFilter)
+                                           || i.ItemCategory.Contains(ViewBag.CurrentFilter)
+                                           || i.ItemPlatform.Contains(ViewBag.CurrentFilter));
+                }
+
+                switch (sortOrder)
+                {
+                    case "category":
+                        items = items.OrderBy(i => i.ItemCategory);
                         break;
-                    case "previous":
-                        Func<Item, bool> isPrevious = i => i.ItemLatest == "false";
-                        var previousItems = items.Where(isPrevious);
-                        Func<Item, bool> isPublishedPrevious = i => i.ItemPublished == "true";
-                        var publishedPreviousItems = previousItems.Where(isPublishedPrevious);
-                        items = publishedPreviousItems;
+                    case "category_desc":
+                        items = items.OrderByDescending(i => i.ItemCategory);
                         break;
-                    case "staged":
-                        Func<Item, bool> isStaged = i => i.ItemPublished == "false";
-                        var stagedItems = items.Where(isStaged);
-                        items = stagedItems;
+                    case "name":
+                        items = items.OrderBy(i => i.ItemName);
+                        break;
+                    case "name_desc":
+                        items = items.OrderByDescending(i => i.ItemName);
+                        break;
+                    case "version":
+                        items = items.OrderBy(i => i.ItemVersion);
+                        break;
+                    case "version_desc":
+                        items = items.OrderByDescending(i => i.ItemVersion);
+                        break;
+                    case "platform":
+                        items = items.OrderBy(i => i.ItemPlatform);
+                        break;
+                    case "platform_desc":
+                        items = items.OrderByDescending(i => i.ItemPlatform);
                         break;
                     default:
-                        Func<Item, bool> isDefault = i => i.ItemLatest == "true";
-                        var defaultItems = items.Where(isDefault);
-                        Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
-                        var defaultLatestItems = defaultItems.Where(isPublishedDefault);
-                        items = defaultLatestItems;
+                        items = items.OrderBy(i => i.ItemCategory);
                         break;
                 }
 
+                return View(items);
+
             } else
             {
-                Func<Item, bool> isDefault = i => i.ItemLatest == "true";
-                var defaultItems = items.Where(isDefault);
-                Func<Item, bool> isPublishedDefault = i => i.ItemPublished == "true";
-                var defaultLatestItems = defaultItems.Where(isPublishedDefault);
-                items = defaultLatestItems;
+
+                return Redirect("https://" + Request.Url.Host + Request.ApplicationPath + "/Company");
+
             }
 
-            if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
-            {
-
-                items = items.Where(i => i.ItemName.Contains(ViewBag.CurrentFilter)
-                                       || i.ItemVersion.Contains(ViewBag.CurrentFilter)
-                                       || i.ItemCategory.Contains(ViewBag.CurrentFilter)
-                                       || i.ItemPlatform.Contains(ViewBag.CurrentFilter));
-            }
-
-            switch (sortOrder)
-            {
-                case "category":
-                    items = items.OrderBy(i => i.ItemCategory);
-                    break;
-                case "category_desc":
-                    items = items.OrderByDescending(i => i.ItemCategory);
-                    break;
-                case "name":
-                    items = items.OrderBy(i => i.ItemName);
-                    break;
-                case "name_desc":
-                    items = items.OrderByDescending(i => i.ItemName);
-                    break;
-                case "version":
-                    items = items.OrderBy(i => i.ItemVersion);
-                    break;
-                case "version_desc":
-                    items = items.OrderByDescending(i => i.ItemVersion);
-                    break;
-                case "platform":
-                    items = items.OrderBy(i => i.ItemPlatform);
-                    break;
-                case "platform_desc":
-                    items = items.OrderByDescending(i => i.ItemPlatform);
-                    break;
-                default:
-                    items = items.OrderBy(i => i.ItemCategory);
-                    break;
-            }
-
-            return View(items);
         }
 
     }
