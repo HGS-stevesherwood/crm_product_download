@@ -25,7 +25,11 @@
 
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                        }
 
                         break;
 
@@ -33,7 +37,11 @@
 
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary">@Dnn.LocalizeString("CurrentView")</a>
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("PriorView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                        }
 
                         break;
 
@@ -41,7 +49,11 @@
 
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary">@Dnn.LocalizeString("CurrentView")</a>
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("StagedView")</a>
+
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("StagedView")</a>
+                        }
 
                         break;
 
@@ -49,7 +61,11 @@
 
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
                         <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+
+                        if (Dnn.ModuleContext.IsEditable)
+                        {
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                        }
 
                         break;
 
@@ -75,7 +91,7 @@
             </th>
             <th>Description</th>
             <th>Release Notes</th>
-            <th>Installation Guide</th>
+            <th>Install Guide</th>
             <th>Download</th>
             @{
                 if (Dnn.ModuleContext.IsEditable)
@@ -93,10 +109,10 @@
                 <td>@item.ItemPlatform</td>
                 <td>@item.ItemDescription</td>
                 <td>
-                    <a href="@Url.Action("Release", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ReleaseNotes")</a>
+                    <a href="@Url.Action("ReleaseNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ReleaseNotes")</a>
                 </td>
                 <td>
-                    <a href="@Url.Action("Installation", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationGuide")</a>
+                    <a href="@Url.Action("InstallationNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationGuide")</a>
                 </td>
                 <td>
                     <a href="@Url.Action("Activate", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DownloadItem")</a>

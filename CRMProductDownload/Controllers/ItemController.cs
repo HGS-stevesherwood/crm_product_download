@@ -90,39 +90,27 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             return Redirect(item.ItemSignedUrl);
         }
 
-        public ActionResult Release(int itemId)
+        public ActionResult ReleaseNotes(int itemId)
         {
-
             var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
-
-            GetSignedReleaseURL(item);
-
-            item.ItemAvailable = item.ItemDuration;
-
-            ItemManager.Instance.UpdateItem(item);
-
-            return Redirect(item.ItemSignedUrl);
+            string ReleasePath = Server.MapPath("~/App_Data/") + item.ItemReleasePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(ReleasePath);
+            return File(FileBytes, "application/txt");
         }
 
-
-        public ActionResult Installation(int itemId)
+        public ActionResult InstallationNotes(int itemId)
         {
 
             var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
-
-            GetSignedInstallationURL(item);
-
-            item.ItemAvailable = item.ItemDuration;
-
-            ItemManager.Instance.UpdateItem(item);
-
-            return Redirect(item.ItemSignedUrl);
+            string InstallationPath = Server.MapPath("~/App_Data/") + item.ItemInstallationPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(InstallationPath);
+            return File(FileBytes, "application/txt");
         }
 
         public void GetSignedURL(Item item)
         {
             //Create object of FileInfo for specified path           
-            FileInfo pkfile = new FileInfo(Server.MapPath("~/private.pem"));
+            FileInfo pkfile = new FileInfo(Server.MapPath("~/App_Data/private.pem"));
             
             item.ItemSignedUrl = AmazonCloudFrontUrlSigner.GetCannedSignedURL(
             AmazonCloudFrontUrlSigner.Protocol.https,
