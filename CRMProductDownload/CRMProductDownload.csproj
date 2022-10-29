@@ -144,10 +144,12 @@
     </Compile>
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\ItemManager.cs" />
+    <Compile Include="Components\TransactionManager.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

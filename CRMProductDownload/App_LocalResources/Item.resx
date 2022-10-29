@@ -252,4 +252,10 @@
   <data name="StagedView.Text" xml:space="preserve">
     <value>Staged Releases</value>
   </data>
+  <data name="lblTransactions.Text" xml:space="preserve">
+    <value>Transactions Log</value>
+  </data>
+  <data name="ViewLog.Text" xml:space="preserve">
+    <value>Logs</value>
+  </data>
 </root>

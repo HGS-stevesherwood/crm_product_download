@@ -30,6 +30,9 @@ using System.IO;
 using System.Web.Configuration;
 using Amazon.CloudFront;
 using System.Reflection;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace CRM.Modules.CRMProductDownload.Controllers
 {
@@ -78,33 +81,52 @@ namespace CRM.Modules.CRMProductDownload.Controllers
 
         public ActionResult Activate(int itemId)
         {
-
             var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
-
             GetSignedURL(item);
-
             item.ItemAvailable = item.ItemDuration;
-
+            LogTransaction(item);
             ItemManager.Instance.UpdateItem(item);
-
             return Redirect(item.ItemSignedUrl);
         }
 
-        public ActionResult ReleaseNotes(int itemId)
+        public void LogTransaction(Item item)
+        {
+            Transaction t = new Transaction();
+            t.ItemId = item.ItemId;
+            t.ItemName = item.ItemName;
+            t.ItemVersion = item.ItemVersion;
+            t.Username = User.Username;
+            t.ItemPlatform = item.ItemPlatform;
+            t.IpAddress = Request.UserHostAddress;
+            t.Affiliate = User.AffiliateID;
+            t.TransactionDate = DateTime.UtcNow;
+
+            TransactionManager.Instance.CreateTransaction(t);
+        }
+
+        public FileResult ViewLog(int itemId)
+        {
+            
+            var transactions = TransactionManager.Instance.GetTransactions(ModuleContext.ModuleId);
+            byte[] FileData = Encoding.ASCII.GetBytes(transactions.ToString());
+            
+            return File(FileData, System.Net.Mime.MediaTypeNames.Application.Octet, "transaction_Log_" + ModuleContext.ModuleId);
+        }
+
+        public FileResult ReleaseNotes(int itemId)
         {
             var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
             string ReleasePath = Server.MapPath("~/App_Data/") + item.ItemReleasePath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(ReleasePath);
-            return File(FileBytes, "application/txt");
+            byte[] FileData = System.IO.File.ReadAllBytes(ReleasePath);
+            return File(FileData, System.Net.Mime.MediaTypeNames.Application.Octet, item.ItemReleasePath);
         }
 
-        public ActionResult InstallationNotes(int itemId)
+        public FileResult InstallationNotes(int itemId)
         {
-
             var item = ItemManager.Instance.GetItem(itemId, ModuleContext.ModuleId);
             string InstallationPath = Server.MapPath("~/App_Data/") + item.ItemInstallationPath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(InstallationPath);
-            return File(FileBytes, "application/txt");
+            byte[] FileData = System.IO.File.ReadAllBytes(InstallationPath);
+            return File(FileData, System.Net.Mime.MediaTypeNames.Application.Octet, item.ItemInstallationPath);
         }
 
         public void GetSignedURL(Item item)
@@ -183,6 +205,8 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 item.ItemLatest = item.ItemLatest;
                 item.ItemName = item.ItemName;
                 item.ItemPath = item.ItemPath;
+                item.ItemReleasePath = item.ItemReleasePath;
+                item.ItemInstallationPath = item.ItemInstallationPath;
                 item.ItemExtension = item.ItemExtension;
                 item.ItemPlatform = item.ItemPlatform;
                 item.ItemVersion = item.ItemVersion;
@@ -204,6 +228,8 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 existingItem.ItemLatest = item.ItemLatest;
                 existingItem.ItemName = item.ItemName;
                 existingItem.ItemPath = item.ItemPath;
+                existingItem.ItemReleasePath = item.ItemReleasePath;
+                existingItem.ItemInstallationPath = item.ItemInstallationPath;
                 existingItem.ItemExtension = item.ItemExtension;
                 existingItem.ItemPlatform = item.ItemPlatform;
                 existingItem.ItemDescription = item.ItemDescription;
