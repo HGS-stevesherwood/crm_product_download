@@ -1,15 +1,4 @@
-﻿/*
-' Copyright (c) 2022 CRM.com
-'  All rights reserved.
-' 
-' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-' DEALINGS IN THE SOFTWARE.
-' 
-*/
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Mvc;
@@ -33,6 +22,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace CRM.Modules.CRMProductDownload.Controllers
 {
@@ -87,6 +77,39 @@ namespace CRM.Modules.CRMProductDownload.Controllers
             LogTransaction(item);
             ItemManager.Instance.UpdateItem(item);
             return Redirect(item.ItemSignedUrl);
+        }
+
+        public ActionResult LoadItems()
+        {
+            using (StreamReader r = new StreamReader(Server.MapPath("~/App_Data/Items.json")))
+            {
+                string json = r.ReadToEnd();
+                List<Item> Items = JsonConvert.DeserializeObject<List<Item>>(json);
+                foreach(Item item in Items)
+                {
+                    item.CreatedByUserId = User.UserID;
+                    item.CreatedOnDate = DateTime.UtcNow;
+                    item.LastModifiedByUserId = User.UserID;
+                    item.LastModifiedOnDate = DateTime.UtcNow;
+                    item.ItemCategory = item.ItemCategory;
+                    item.ItemPublished = item.ItemPublished;
+                    item.ItemLatest = item.ItemLatest;
+                    item.ItemName = item.ItemName;
+                    item.ItemPath = item.ItemPath;
+                    item.ItemReleasePath = item.ItemReleasePath;
+                    item.ItemInstallationPath = item.ItemInstallationPath;
+                    item.ItemExtension = item.ItemExtension;
+                    item.ItemPlatform = item.ItemPlatform;
+                    item.ItemVersion = item.ItemVersion;
+                    item.ItemUrl = item.ItemUrl;
+                    item.ModuleId = ModuleContext.ModuleId;
+
+                    ItemManager.Instance.CreateItem(item);
+                }
+            }
+
+            return RedirectToDefaultRoute();
+
         }
 
         public void LogTransaction(Item item)
@@ -209,6 +232,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 item.ItemInstallationPath = item.ItemInstallationPath;
                 item.ItemExtension = item.ItemExtension;
                 item.ItemPlatform = item.ItemPlatform;
+                item.ItemDescription = item.ItemDescription;
                 item.ItemVersion = item.ItemVersion;
                 item.ItemUrl = item.ItemUrl;
 

@@ -2,13 +2,16 @@
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
-
 <div id="Items-@Dnn.ModuleContext.ModuleId">
 
     <form asp-action="Item" method="Index">
-
-        <button type="button" class="btn btn-primary btn-sm btn-block">Product Downloads</button>
-        <hr />
+        <center>
+            <h1>Product Downloads</h1>
+            <hr />
+            <div class="alert alert-dark" role="alert">
+                The software you are about to download is subject to export control laws and regulations. By downloading this software, you agree that you will not knowingly, without prior written authorization from the competent government authorities, export or reexport - directly or indirectly - any software downloaded from this website to any prohibited destination, end-user, or end-use.
+            </div>
+        </center>
         <div class="btn-group">
 
             @{
@@ -19,48 +22,52 @@
 
                     case "latest":
 
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-lg btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("PriorView")</a>
 
                         if (Dnn.ModuleContext.IsEditable)
                         {
-                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("LoadItems", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("LoadItems")</a>
                         }
 
                         break;
 
                     case "previous":
 
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary">@Dnn.LocalizeString("CurrentView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("PriorView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("CurrentView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-lg btn-primary active" aria-current="page">@Dnn.LocalizeString("PriorView")</a>
 
                         if (Dnn.ModuleContext.IsEditable)
                         {
-                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("LoadItems", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("LoadItems")</a>
                         }
 
                         break;
 
                     case "staged":
 
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary">@Dnn.LocalizeString("CurrentView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("CurrentView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("PriorView")</a>
 
                         if (Dnn.ModuleContext.IsEditable)
                         {
-                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary active" aria-current="page">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("LoadItems", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("LoadItems")</a>
                         }
 
                         break;
 
                     default:
 
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
-                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-primary">@Dnn.LocalizeString("PriorView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.LatestSortParam })" class="btn btn-lg btn-primary active" aria-current="page">@Dnn.LocalizeString("CurrentView")</a>
+                        <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.PreviousSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("PriorView")</a>
 
                         if (Dnn.ModuleContext.IsEditable)
                         {
-                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("Index", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("StagedView")</a>
+                            <a href="@Url.Action("LoadItems", "Item", new { viewOrder = ViewBag.AllSortParam })" class="btn btn-lg btn-primary">@Dnn.LocalizeString("LoadItems")</a>
                         }
 
                         break;
@@ -69,10 +76,12 @@
             }
 
         </div>
-        <div class="dnnFormItem">
+        <hr />
+        <div id="searchItems" class="dnnFormItem">
+            <input type="submit" value="Search" class="btn btn-lg btn-primary" />
             <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" />
         </div>
+        <hr />
     </form>
     <table class="table table-striped table-hover">
         <tr>
@@ -108,7 +117,7 @@
                     <a href="@Url.Action("ReleaseNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ReleaseNotes")</a>
                 </td>
                 <td>
-                    <a href="@Url.Action("InstallationNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationGuide")</a>
+                    <a href="@Url.Action("InstallationNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationNotes")</a>
                 </td>
                 <td>
                     <a href="@Url.Action("Activate", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DownloadItem")</a>

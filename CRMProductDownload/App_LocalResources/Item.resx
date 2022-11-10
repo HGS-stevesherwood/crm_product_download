@@ -231,7 +231,7 @@
   <data name="FilterView.Text" xml:space="preserve">
     <value>Filter:</value>
   </data>
-  <data name="InstallationGuide.Text" xml:space="preserve">
+  <data name="InstallationNotes.Text" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="lblInstallationPath.Text" xml:space="preserve">
@@ -257,5 +257,8 @@
   </data>
   <data name="ViewLog.Text" xml:space="preserve">
     <value>Logs</value>
+  </data>
+  <data name="LoadItems.Text" xml:space="preserve">
+    <value>Load Items</value>
   </data>
 </root>
