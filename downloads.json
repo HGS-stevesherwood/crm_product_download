@@ -1,0 +1,253 @@
+[
+ {
+  "Name": "ENVI",
+  "Version": "5.6.3",
+  "Platform": "Windows",
+  "Description": "ENVI download includes IDL and the ENVI modules (excludes ENVI Photogrammetry, Crop Science and SARscape)",
+  "Release Notes": "envi563-release_notes.html",
+  "Installer Notes": "envi563-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envi563\\envi563-win.zip"
+ },
+ {
+  "Name": "ENVI",
+  "Version": "5.6.3",
+  "Platform": "Linux",
+  "Description": "ENVI download includes IDL and the ENVI modules (excludes ENVI Photogrammetry, Crop Science and SARscape)",
+  "Release Notes": "envi563-release_notes.html",
+  "Installer Notes": "envi563-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envi563\\envi563-linux.tar.gz"
+ },
+ {
+  "Name": "ENVI",
+  "Version": "5.6.3",
+  "Platform": "Mac",
+  "Description": "ENVI download includes IDL and the ENVI modules (excludes ENVI Photogrammetry, Crop Science and SARscape)",
+  "Release Notes": "envi563-release_notes.html",
+  "Installer Notes": "envi563-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envi563\\envi563-mac.pkg"
+ },
+ {
+  "Name": "ENVI",
+  "Version": "5.6.3",
+  "Platform": "Mac (command line installer)",
+  "Description": "ENVI download includes IDL and the ENVI modules (excludes ENVI Photogrammetry, Crop Science and SARscape)",
+  "Release Notes": "envi563-release_notes.html",
+  "Installer Notes": "envi563-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envi563\\envi563-mac.tar.gz"
+ },
+ {
+  "Name": "IDL",
+  "Version": "8.8.3",
+  "Platform": "Windows",
+  "Description": "Platforms supported are 64-bit Intel and AMD with Microsoft Windows 10 and 11.",
+  "Release Notes": "idl883-release_notes.html",
+  "Installer Notes": "idl883-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\idl883\\idl883-win.exe"
+ },
+ {
+  "Name": "IDL",
+  "Version": "8.8.3",
+  "Platform": "Linux",
+  "Description": "Platforms supported are Intel\/AMD 64-bit, kernel 4.18.0 or higher, glibc 2.28 or higher.",
+  "Release Notes": "idl883-release_notes.html",
+  "Installer Notes": "idl883-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\idl883\\idl883-linux.tar.gz"
+ },
+ {
+  "Name": "IDL",
+  "Version": "8.8.3",
+  "Platform": "Mac",
+  "Description": "Platforms supported are macOS 10.14, 10.15 (Intel 64-bit), 11, and 12 (M1 and Intel 64-bit). M1 with Rosetta 2 translation environment.",
+  "Release Notes": "idl883-release_notes.html",
+  "Installer Notes": "idl883-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\idl883\\idl883-mac.pkg"
+ },
+ {
+  "Name": "IDL",
+  "Version": "8.8.3",
+  "Platform": "Mac (command line installer)",
+  "Description": "UNIX style command line installer. Platforms supported are macOS 10.14, 10.15 (Intel 64-bit), 11, and 12 (M1 and Intel 64-bit). M1 with Rosetta 2 translation environment.",
+  "Release Notes": "idl883-release_notes.html",
+  "Installer Notes": "idl883-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\idl883\\idl883-mac.tar.gz"
+ },
+ {
+  "Name": "IDL DICOM Toolkit",
+  "Version": "8.8.3",
+  "Platform": "Windows",
+  "Description": "Requires IDL 8.8.3 for Windows and IDL DICOM Toolkit or Network Services licensing. The module works on Intel\/AMD 64-bit Windows 10 \/11 platforms.",
+  "Installer Notes": "idldicomtoolkit883-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\idldicomtoolkit883\\idldicomtoolkit883-win.exe"
+ },
+ {
+  "Name": "Legacy License Server",
+  "Version": 2020.07,
+  "Platform": "Linux",
+  "Description": "FlexNet License Server. Platforms supported are Microsoft Windows Server 2012, 2012 R2, 2016, 2019, and Windows 8.1, 10.",
+  "Release Notes": "flexnetserver2020.07-release_notes.html",
+  "Installer Notes": "flexnetserver2020.07-linux-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\flexnet-license_server\\flexnetserver2020.07-linux.tar.gz"
+ },
+ {
+  "Name": "Legacy License Server",
+  "Version": 2020.07,
+  "Platform": "Windows",
+  "Description": "FlexNet License Server. Platforms supported are CentOS 7.x, Red Hat Enterprise Linux (RHEL) 7.x, and Ubuntu 16, 18.",
+  "Release Notes": "flexnetserver2020.07-release_notes.html",
+  "Installer Notes": "flexnetserver2020.07-windows-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\flexnetserver2020.07-win.exe"
+ },
+ null,
+ {
+  "Name": "GSF",
+  "Version": "3.0",
+  "Platform": "Windows",
+  "Description": "GSF enables ENVI Server capabilities when installed alongside ENVI",
+  "Release Notes": "RELEASENOTES_GSF30.md",
+  "Installer Notes": "gsf30_install_notes.txt",
+  "Installer": "\\\\fridge\\RSI_HOME\\eduardo\\new_downloads_center\\other_installers\\gsf30_setup.exe"
+ },
+ {
+  "Name": "GSF",
+  "Version": "3.0",
+  "Platform": "Linux",
+  "Description": "GSF enables ENVI Server capabilities when installed alongside ENVI",
+  "Release Notes": "RELEASENOTES_GSF30.md",
+  "Installer Notes": "gsf30_install_notes.txt",
+  "Installer": "\\\\fridge\\RSI_HOME\\eduardo\\new_downloads_center\\other_installers\\gsf30_linux_dist.tar.gz"
+ },
+ {
+  "Name": "ENVI Photogrammetry Module",
+  "Version": "5.6.3",
+  "Platform": "Windows",
+  "Release Notes": "photogrammetry563-release_notes.html",
+  "Installer Notes": "photogrammetry563-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\photogrammetry563\\photogrammetry563-win.exe"
+ },
+ {
+  "Name": "ENVI Py for ArcGIS Pro",
+  "Version": 1.4,
+  "Platform": "Windows",
+  "Description": "System requirements: ENVI 5.5.2 or later and ArcGIS Pro 2.2 or later",
+  "Installer Notes": "envipy14-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envipy14\\setup-envipy14-arcgispro.exe"
+ },
+ {
+  "Name": "ENVI Py for ArcMap",
+  "Version": 1.4,
+  "Platform": "Windows",
+  "Description": "System requirements: ENVI 5.5.2 or later and ArcMap 10.6 or later",
+  "Installer Notes": "envipy14-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\idl883_envi563\\web_download\\envipy14\\setup-envipy14-arcmap.exe"
+ },
+ {
+  "Name": "PrecisionPass",
+  "Version": "1.0",
+  "Platform": "Windows",
+  "Description": "Platforms supported are 64-bit Intel and AMD with Microsoft Windows 7 SP1, 8 and 10",
+  "Release Notes": "precisionpass10-release_notes.html",
+  "Installer Notes": "precisionpass10-install.html",
+  "Installer": "\\\\fridge\\RSI_HOME\\eduardo\\new_downloads_center\\other_installers\\precisionpass10-win.exe"
+ },
+ {
+  "Name": "ENVI Japanese Language Pack",
+  "Version": 5.6,
+  "Platform": "Windows, Linux, Mac",
+  "Description": "Japanese language pack for ENVI 5.6 and later",
+  "Installer": "\\\\fridge\\RSI_HOME\\eduardo\\new_downloads_center\\other_installers\\envi56-jpn-win.exe"
+ },
+ {
+  "Name": "ENVI Deep Learning ",
+  "Version": "2.0",
+  "Platform": "Windows",
+  "Description": "This ENVI Module exposes Machine and Deep Learning algorithms",
+  "Release Notes": "envideeplearning20-release_notes.html",
+  "Installer Notes": "envideeplearning20-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_deep_learning20\\envideeplearning20-win.exe"
+ },
+ {
+  "Name": "ENVI Deep Learning ",
+  "Version": "2.0",
+  "Platform": "Linux",
+  "Description": "This ENVI Module exposes Machine and Deep Learning algorithms",
+  "Release Notes": "envideeplearning20-release_notes.html",
+  "Installer Notes": "envideeplearning20-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_deep_learning20\\envi_deep_learning20-linux.tar.gz"
+ },
+ {
+  "Name": "ENVI Deep Learning Tutorial Data",
+  "Version": "2.0",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_deep_learning20\\web_download\\envi_deep_learning_tutorial_data.zip"
+ },
+ {
+  "Name": "ENVI Crop Science",
+  "Version": "1.1.2",
+  "Platform": "Windows",
+  "Description": "ENVI Module with functionality for agricultural analysis. Requires ENVI 5.6. or higher.",
+  "Release Notes": "envicropscience112-release_notes.html",
+  "Installer Notes": "envicropscience112-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_crop_science112\\fno\\envicropscience112-win.exe"
+ },
+ {
+  "Name": "ENVI Crop Science",
+  "Version": "1.1.2",
+  "Platform": "Linux",
+  "Description": "ENVI Module with functionality for agricultural analysis. Requires ENVI 5.6. or higher.",
+  "Release Notes": "envicropscience112-release_notes.html",
+  "Installer Notes": "envicropscience112-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_crop_science112\\fno\\envicropscience112-linux.tar.gz"
+ },
+ {
+  "Name": "ENVI Crop Science",
+  "Version": "1.1.2",
+  "Platform": "Mac",
+  "Description": "ENVI Module with functionality for agricultural analysis. Requires ENVI 5.6. or higher.",
+  "Release Notes": "envicropscience112-release_notes.html",
+  "Installer Notes": "envicropscience112-install.html",
+  "Installer": "\\\\fridge\\RSI_DIST_PUBLIC\\envi_crop_science112\\fno\\envicropscience112-mac.tar.gz"
+ },
+ {
+  "Name": "Opticalscape",
+  "Version": "5.6.2",
+  "Platform": "Windows",
+  "Description": "This version is compatible with ENVI 5.6.3",
+  "Installer Notes": "OpticalScape562_install.zip",
+  "Installer": "\\\\fridge\\3rd_party\\sarmap_SARscape\\SARscape_SARscapeAT_Opticalscape_5621\\Installers\\Opticalscape\\Opticalcape_v562.exe"
+ },
+ {
+  "Name": "SARscape",
+  "Version": "5.6.2.1",
+  "Platform": "Windows",
+  "Description": "This version is compatible with ENVI 5.6.3",
+  "Release Notes": "SARscape_Release_Notes5621.pdf",
+  "Installer Notes": "SARscape5621_install.zip",
+  "Installer": "\\\\fridge\\3rd_party\\sarmap_SARscape\\SARscape_SARscapeAT_Opticalscape_5621\\Installers\\SARscape\\SARscape_v5621.exe"
+ },
+ {
+  "Name": "SARscape",
+  "Version": "5.6.2.1",
+  "Platform": "Linux",
+  "Description": "This version is compatible with ENVI 5.6.3",
+  "Release Notes": "SARscape_Release_Notes5621.pdf",
+  "Installer Notes": "SARscape5621_install.zip",
+  "Installer": "\\\\fridge\\3rd_party\\sarmap_SARscape\\SARscape_SARscapeAT_Opticalscape_5621\\Installers\\SARscape\\SARscape_linux_v5621.tgz"
+ },
+ {
+  "Name": "SARscape Analytics",
+  "Version": "5.6.2.1",
+  "Platform": "Windows",
+  "Description": "This version is compatible with ENVI 5.6.3",
+  "Release Notes": "SARscape_AT_Release_Notes5621.pdf",
+  "Installer Notes": "SARscapeAnalytics5621_install.zip",
+  "Installer": "\\\\fridge\\3rd_party\\sarmap_SARscape\\SARscape_SARscapeAT_Opticalscape_5621\\Installers\\SARscapeAnalyticsToolbox\\SARscape_at_v5621.exe"
+ },
+ {
+  "Name": "SARscape Analytics",
+  "Version": "5.6.2.1",
+  "Platform": "Linux",
+  "Description": "This version is compatible with ENVI 5.6.3",
+  "Release Notes": "SARscape_AT_Release_Notes5621.pdf",
+  "Installer Notes": "SARscapeAnalytics5621_install.zip",
+  "Installer": "\\\\fridge\\3rd_party\\sarmap_SARscape\\SARscape_SARscapeAT_Opticalscape_5621\\Installers\\SARscapeAnalyticsToolbox\\SARscape_at_linux_v5621.tgz"
+ }
+]
