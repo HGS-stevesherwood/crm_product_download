@@ -146,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Components\Extenstions.cs" />
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\ItemManager.cs" />
     <Compile Include="Components\TransactionManager.cs" />

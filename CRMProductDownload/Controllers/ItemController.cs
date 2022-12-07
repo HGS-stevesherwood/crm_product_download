@@ -272,7 +272,7 @@ namespace CRM.Modules.CRMProductDownload.Controllers
         }
 
         [ModuleAction(ControlKey = "Edit", TitleKey = "AddItem")]
-        public ActionResult Index(string sortOrder, string searchString, string viewOrder)
+        public ActionResult Index(string sortOrder, string searchString, string viewOrder, string platforms)
         {
             if (Request.IsAuthenticated)
             {
@@ -286,20 +286,37 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                 ViewBag.PreviousSortParam = viewOrder == "previous" ? "previous" : "previous";
                 ViewBag.AllSortParam = viewOrder == "staged" ? "staged" : "staged";
 
-
-                //Setup Filter
-                ViewBag.CurrentFilter = searchString;
+                //Setup filter for platforms
+                List<SelectListItem> oslist = new List<SelectListItem>();
+                oslist.Add(new SelectListItem { Text = "All", Value = "All" });
+                oslist.Add(new SelectListItem { Text = "Windows", Value = "Windows" });
+                oslist.Add(new SelectListItem { Text = "Linux", Value = "Linux" });
+                oslist.Add(new SelectListItem { Text = "Mac", Value = "Mac" });
+                ViewBag.Platforms = oslist;
 
 
                 //Setup ViewOrder
                 ViewBag.ViewFilter = viewOrder;
 
+                //Setup Search
+                ViewBag.CurrentFilter = searchString;
+                
+
+                //Setup Platform Filter
+                if(platforms == null)
+                {
+                    ViewBag.PlatformFilter = "All";
+                }else
+                {
+                    ViewBag.PlatformFilter = platforms;
+                }
+                
 
                 //Setup ViewItems
                 var items = ItemManager.Instance.GetItems(ModuleContext.ModuleId);
 
 
-                //Handle Request Events
+                //Setup Category Filter
                 if (!String.IsNullOrEmpty(ViewBag.ViewFilter))
                 {
                     switch (viewOrder)
@@ -342,15 +359,24 @@ namespace CRM.Modules.CRMProductDownload.Controllers
                     items = defaultLatestItems;
                 }
 
+                //Search Filter
                 if (!String.IsNullOrEmpty(ViewBag.CurrentFilter))
                 {
-
-                    items = items.Where(i => i.ItemName.Contains(ViewBag.CurrentFilter)
-                                           || i.ItemVersion.Contains(ViewBag.CurrentFilter)
-                                           || i.ItemCategory.Contains(ViewBag.CurrentFilter)
-                                           || i.ItemPlatform.Contains(ViewBag.CurrentFilter));
+                    
+                    items = items.Where(i => i.ItemName.CaseInsensitiveContains(searchString)
+                                           || i.ItemVersion.CaseInsensitiveContains(searchString)
+                                           || i.ItemCategory.CaseInsensitiveContains(searchString)
+                                           || i.ItemPlatform.CaseInsensitiveContains(searchString));
                 }
 
+                //Platform Filter
+                if (ViewBag.PlatformFilter != "All")
+                {
+                    items = items.Where(i => i.ItemPlatform.Contains(ViewBag.PlatformFilter));
+                }
+
+
+                //Setup Sort Order 
                 switch (sortOrder)
                 {
                     case "category":
