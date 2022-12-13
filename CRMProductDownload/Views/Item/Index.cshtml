@@ -128,55 +128,74 @@
             @foreach (var item in Model)
             {
 
-            <tr>
-                <td>@item.ItemName</td>
-                <td>@item.ItemVersion</td>
-                <td>@item.ItemPlatform</td>
-                <td>@item.ItemDescription</td>
-                <td>
-                    <a href="@Url.Action("ReleaseNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ReleaseNotes")</a>
-                </td>
-                <td>
-                    <a href="@Url.Action("InstallationNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationNotes")</a>
-                </td>
-                <td>
-                    <a href="@Url.Action("Activate", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DownloadItem")</a>
-                </td>
-
-                @{
-                    if (Dnn.ModuleContext.IsEditable)
-                    {
-                        <td>
-                            <div>
-                                <a href="@Url.Action("Edit", "Item", new { ctl = "Edit", itemId = item.ItemId })">@Dnn.LocalizeString("EditItem")</a>
-                                <a href="@Url.Action("Delete", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DeleteItem")</a>
-                                <a href="@Url.Action("ViewLog", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ViewLog")</a>
-                                @{
-
-                                    if (item.ItemLatest == "true" && item.ItemPublished == "true")
-                                    {
-                                        <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
-                                        <a href="@Url.Action("Demote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblDemote")</a>
-                                    }
-
-
-                                    if (item.ItemLatest == "false" && item.ItemPublished == "true")
-                                    {
-                                        <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
-                                        <a href="@Url.Action("Promote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPromote")</a>
-                                    }
-
-                                    if (item.ItemPublished == "false")
-                                    {
-                                        <a href="@Url.Action("Publish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPublish")</a>
-                                    }
-
-                                }
-                            </div>
-                        </td>
-                    }
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.ItemVersion</td>
+            <td>@item.ItemPlatform</td>
+            <td>@item.ItemDescription</td>
+            @{
+                if (item.ItemReleasePath.Contains("-----"))
+                {
+                    <td>N/A</td>
                 }
-            </tr>
+                else
+                {
+                    <td>
+                        <a href="@Url.Action("ReleaseNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ReleaseNotes")</a>
+                    </td>
+                }
+            }
+            @{
+                if (item.ItemReleasePath.Contains("-----"))
+                {
+                    <td>N/A</td>
+                }
+                else
+                {
+                    <td>
+                        <a href="@Url.Action("InstallationNotes", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("InstallationNotes")</a>
+                    </td>
+                }
+            }
+
+            <td>
+                <a href="@Url.Action("Activate", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DownloadItem")</a>
+            </td>
+
+            @{
+                if (Dnn.ModuleContext.IsEditable)
+                {
+                    <td>
+                        <div>
+                            <a href="@Url.Action("Edit", "Item", new { ctl = "Edit", itemId = item.ItemId })">@Dnn.LocalizeString("EditItem")</a>
+                            <a href="@Url.Action("Delete", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("DeleteItem")</a>
+                            <a href="@Url.Action("ViewLog", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("ViewLog")</a>
+                            @{
+
+                                if (item.ItemLatest == "true" && item.ItemPublished == "true")
+                                {
+                                    <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
+                                    <a href="@Url.Action("Demote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblDemote")</a>
+                                }
+
+
+                                if (item.ItemLatest == "false" && item.ItemPublished == "true")
+                                {
+                                    <a href="@Url.Action("UnPublish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblUnPublish")</a>
+                                    <a href="@Url.Action("Promote", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPromote")</a>
+                                }
+
+                                if (item.ItemPublished == "false")
+                                {
+                                    <a href="@Url.Action("Publish", "Item", new { itemId = item.ItemId })">@Dnn.LocalizeString("lblPublish")</a>
+                                }
+
+                            }
+                        </div>
+                    </td>
+                }
+            }
+        </tr>
         }
         </table>
     </div>
