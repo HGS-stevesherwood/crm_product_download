@@ -119,7 +119,7 @@ namespace CRM.Modules.CRMProductDownload.Models
         ///<summary>
         /// The date the object expires
         ///</summary>
-        public DateTime ItemDuration { get; set; } = DateTime.Now.AddMinutes(Double.Parse("30"));
+        public DateTime ItemDuration { get; set; } = DateTime.Now.AddDays(Double.Parse("30"));
 
         ///<summary>
         /// The state of the publised product

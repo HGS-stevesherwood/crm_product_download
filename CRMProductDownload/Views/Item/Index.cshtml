@@ -2,6 +2,11 @@
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
+<script>function platformsChangefunc(item) {
+    $("#Submit").val = "platform";
+    $("#Submit").click();
+}
+</script>
 
 <div id="Items-@Dnn.ModuleContext.ModuleId">
 
@@ -82,13 +87,21 @@
         </center>
         <hr />
         <div id="searchItems" class="dnnFormItem">
-            <input type="submit" value="Platform" class="btn btn-lg btn-primary" />
-            @Html.DropDownList("platforms", (IEnumerable<SelectListItem>)ViewBag.Platforms)
-            <input type="text" style="height:35px" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-lg btn-primary" />
+            <div class="row flex-nowrap">
+                <div class="col">
+                    <label>Platform Filter:</label>
+                </div>
+                <div class="col">
+                    @Html.DropDownList("platforms", (IEnumerable<SelectListItem>)ViewBag.Platforms, new { id = "platforms", @class = "form-control", @onchange = "platformsChangefunc(this.value)" })
+                </div>
+                <div class="col">
+                    <input type="text" style="height:35px" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                </div>
+                <div class="col">
+                    <input type="submit" value="Search" id="Submit" class="btn btn-primary" />
+                </div>
+            </div>
         </div>
-
-
     </form>
     <table class="table table-striped table-hover">
         <tr>
